@@ -8,7 +8,6 @@ import 'package:techblog/gen/assets.gen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      
       systemNavigationBarIconBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.dark,
       systemNavigationBarColor: SolidColors.systemNavigationBarColor,
@@ -29,14 +28,26 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
-      //  const Locale('en', ''), // پشتیبانی از انگلیسی
+        //  const Locale('en', ''), // پشتیبانی از انگلیسی
         const Locale('fa', ''), // پشتیبانی از فارسی
       ],
-   
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+          useMaterial3: true,
+          textTheme: TextTheme(
+              headlineLarge: TextStyle(
+                  fontFamily: "iransans",
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  color: SolidColors.posterTitle),
+              headlineMedium: TextStyle(
+                  fontFamily: "iransans",
+                  fontSize: 12,
+                  fontWeight: FontWeight.w300,
+                  color: SolidColors.posterSubTitle), headlineSmall: TextStyle(
+                  fontFamily: "iransans",
+                  fontSize: 12,
+                  fontWeight: FontWeight.w300,
+                  color: SolidColors.hashTag))),
       home: SplashScreen(),
     );
   }
