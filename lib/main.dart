@@ -47,7 +47,11 @@ class MyApp extends StatelessWidget {
                   fontFamily: "iransans",
                   fontSize: 12,
                   fontWeight: FontWeight.w300,
-                  color: SolidColors.hashTag))),
+                  color: SolidColors.hashTag),bodyMedium: TextStyle(
+                  fontFamily: "iransans",
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: SolidColors.blackColor))),
       home: SplashScreen(),
     );
   }
