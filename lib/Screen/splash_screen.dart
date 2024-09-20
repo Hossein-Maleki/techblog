@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:techblog/Screen/home_screen.dart';
+import 'package:techblog/Screen/main_screen.dart';
 import 'package:techblog/constans/const_colors.dart';
 import 'package:techblog/gen/assets.gen.dart';
 
@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(Duration(seconds: 3)).then((value) {
       Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-        MyWidget()
+       MainScreen()
        ));
     });
   }

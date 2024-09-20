@@ -1,10 +1,7 @@
-
- 
 import 'package:techblog/model/fake_data/hashtag_model.dart';
+import 'package:techblog/model/fake_data/podcast-model.dart';
 
 import 'blog_model.dart';
-
-
 
 //blog fake data
 List<HashTagModel> tagList = [
@@ -268,5 +265,22 @@ List<BlogModel> blogList = [
 مشکل اما اینجاست که این دسته از اسپیکرهای باریک یا بایست حالت ایستاده و آزاد داشته باشند، یا اینکه با کمی فاصله از سطوح دیگر در جای خود قرار بگیرند زیرا نصب کردن‌شان موجب کاهش قابلیت ارتعاش و تولید صوت در آنها می‌شود.
       """,
       views: "256"),
- 
+];
+
+//podcast frake data
+List <PodCastModel> podcastList = [
+  PodCastModel(
+      imageUrl:   "https://digiato.com/wp-content/uploads/2022/02/10897985_639437109516078_4342420382567329691_n-300x300.jpg",
+      title: "رمزون"),
+  PodCastModel(
+      imageUrl: "https://digiato.com/wp-content/uploads/2022/04/cghjm.jpg",
+      title: "پادی کست"),
+  PodCastModel(
+      imageUrl:
+          "https://digiato.com/wp-content/uploads/2022/02/10897985_639437109516078_4342420382567329691_n-300x300.jpg",
+      title: "تکنوکست"),
+  PodCastModel(
+      imageUrl:
+          "https://digiato.com/wp-content/uploads/2022/04/1200-178443098-space-exploration-risks_smaller.jpg",
+      title: "رادیو کدیاد"),
 ];
