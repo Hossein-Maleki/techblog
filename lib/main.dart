@@ -4,7 +4,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:techblog/Screen/splash_screen.dart';
 import 'package:techblog/constans/const_colors.dart';
 
-import 'package:techblog/gen/assets.gen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

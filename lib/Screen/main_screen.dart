@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localization/flutter_localization.dart';
 import 'package:techblog/Screen/home_screen.dart';
+import 'package:techblog/Screen/profilescreen.dart';
 import 'package:techblog/constans/const_colors.dart';
-import 'package:techblog/constans/const_strings.dart';
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:techblog/model/fake_data/data.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -31,7 +29,7 @@ class MainScreen extends StatelessWidget {
       ),
       backgroundColor: SolidColors.scaffoldBg,
       body: Stack(children: [
-        HomeScreen(size: size, textthem: textthem),
+        Center(child: Positioned.fill(child: profilescreen(size: size, textthem: textthem))),
         ButtonNavigator(size: size)
       ]),
     );
@@ -62,7 +60,6 @@ class ButtonNavigator extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(26, 12, 26, 0),
           child: Container(
-            
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(26),
                 gradient: LinearGradient(colors: GradientColors.bottomNav)),
@@ -72,13 +69,11 @@ class ButtonNavigator extends StatelessWidget {
               children: [
                 Assets.icons.user.image(width: 32),
                 Assets.icons.write.image(width: 32),
-                
                 IconButton(
                   splashRadius: 1,
-                 
-                  onPressed: () {  },
-                icon: Assets.icons.home.image(width: 32) ,
-              )
+                  onPressed: () {},
+                  icon: Assets.icons.home.image(width: 32),
+                )
               ],
             ),
           ),
