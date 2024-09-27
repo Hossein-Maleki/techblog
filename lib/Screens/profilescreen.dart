@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localization/flutter_localization.dart';
-import 'package:techblog/Screen/components/component.dart';
+import 'package:techblog/Screens/components/component.dart';
 import 'package:techblog/constans/const_colors.dart';
 import 'package:techblog/constans/const_strings.dart';
 import 'package:techblog/gen/assets.gen.dart';
@@ -84,7 +84,7 @@ class profilescreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 140 ,
+              height: 140,
             )
           ],
         ),

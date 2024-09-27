@@ -1,5 +1,5 @@
-import 'package:techblog/model/fake_data/hashtag_model.dart';
-import 'package:techblog/model/fake_data/podcast-model.dart';
+import 'package:techblog/models/fake_data/hashtag_model.dart';
+import 'package:techblog/models/fake_data/podcast-model.dart';
 
 import 'blog_model.dart';
 
