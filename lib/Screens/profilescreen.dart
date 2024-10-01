@@ -47,11 +47,11 @@ class profilescreen extends StatelessWidget {
             TechDivider(size: size),
             InkWell(
               borderRadius: BorderRadius.circular(8),
-              onDoubleTap: () {},
-              splashColor: SolidColors.primaryColor.withAlpha(1),
+              onTap: () {},
+              splashColor: SolidColors.SplashatabColor,
               child: SizedBox(
                 width: size.width / 1.5,
-                height: 32,
+                height: 36,
                 child: Center(
                   child: Text(MyStrings.myFavBlog),
                 ),
@@ -60,11 +60,11 @@ class profilescreen extends StatelessWidget {
             TechDivider(size: size),
             InkWell(
               borderRadius: BorderRadius.circular(8),
-              onDoubleTap: () {},
-              splashColor: SolidColors.primaryColor.withAlpha(1),
+              onTap: () {},
+            splashColor: SolidColors.SplashatabColor,
               child: SizedBox(
                 width: size.width / 1.5,
-                height: 32,
+                height: 36,
                 child: Center(
                   child: Text(MyStrings.myFavPodcast),
                 ),
@@ -73,11 +73,11 @@ class profilescreen extends StatelessWidget {
             TechDivider(size: size),
             InkWell(
               borderRadius: BorderRadius.circular(8),
-              onDoubleTap: () {},
-              splashColor: SolidColors.primaryColor.withAlpha(1),
+              onTap: () {},
+             splashColor: SolidColors.SplashatabColor,
               child: SizedBox(
                 width: size.width / 1.5,
-                height: 32,
+                height: 36,
                 child: Center(
                   child: Text(MyStrings.logOut),
                 ),

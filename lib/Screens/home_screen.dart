@@ -17,60 +17,63 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: [
-         
-          const SizedBox(
-            height: 5,
-          ),
-          HomeScreenPoster(size: size, textthem: textthem),
-          const SizedBox(
-            height: 12,
-          ),
-          //list view
-          HomescreenTagList(size: size, textthem: textthem),
-          const SizedBox(
-            height: 12,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 32),
-            child: Row(
-              children: [
-                Assets.icons.bluePen.image(width: 24),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(MyStrings.viewHotestBlog,
-                    style: textthem.headlineSmall!.apply(
-                      color: SolidColors.seeMore,
-                    ))
-              ],
+    return SingleChildScrollView(
+      child: SafeArea(
+        child: Column(
+          children: [
+           
+            const SizedBox(
+              height: 5,
             ),
-          ),
-          const SizedBox(height: 7,),
-          //listview blog
-          HomeScreenBlogList(size: size, textthem: textthem),
-      SizedBox(height: 8,)
-                  ,Padding(
-            padding: const EdgeInsets.only(right: 32),
-            child: Row(
-              children: [
-                Assets.icons.microphon.image(width: 24),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(MyStrings.viewHotestPodCasts,
-                    style: textthem.headlineSmall!.apply(
-                      color: SolidColors.seeMore,
-                    ))
-              ]
+            HomeScreenPoster(size: size, textthem: textthem),
+            const SizedBox(
+              height: 12,
             ),
-          ),
-          const SizedBox(height: 7,),
-          //listview podcast
-          HomeScreenPodcastList(size: size)
-        ],
+            //list view
+            HomescreenTagList(size: size, textthem: textthem),
+            const SizedBox(
+              height: 12,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 32),
+              child: Row(
+                children: [
+                  Assets.icons.bluePen.image(width: 24),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(MyStrings.viewHotestBlog,
+                      style: textthem.headlineSmall!.apply(
+                        color: SolidColors.seeMore,
+                      ))
+                ],
+              ),
+            ),
+            const SizedBox(height: 7,),
+            //listview blog
+            HomeScreenBlogList(size: size, textthem: textthem),
+        SizedBox(height: 8,)
+                    ,Padding(
+              padding: const EdgeInsets.only(right: 32),
+              child: Row(
+                children: [
+                  Assets.icons.microphon.image(width: 24),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(MyStrings.viewHotestPodCasts,
+                      style: textthem.headlineSmall!.apply(
+                        color: SolidColors.seeMore,
+                      ))
+                ]
+              ),
+            ),
+            const SizedBox(height: 7,),
+            //listview podcast
+            HomeScreenPodcastList(size: size),
+            SizedBox(height: 60,)
+          ],
+        ),
       ),
     );
   }
