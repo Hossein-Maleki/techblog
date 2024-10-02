@@ -16,7 +16,7 @@ class MyStrings {
   static const String welcom = """به تک‌بلاگ خوش اومدی
 
 برای ارسال مطلب و پادکست باید حتما 
-ثبت نام کنی """;
+ثبت نام کنی. """;
   static const String articleEmpty =
       """هنوز هیچ مقاله ای به جامعه گیک های فارسی 
 اضافه نکردی !!!""";

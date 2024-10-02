@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:techblog/Screens/articels_intro.dart';
-import 'package:techblog/Screens/splash_screen.dart';
 import 'package:techblog/constans/const_colors.dart';
-
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -20,6 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textthem = Theme.of(context).textTheme;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
@@ -32,26 +31,60 @@ class MyApp extends StatelessWidget {
         const Locale('fa', ''), // پشتیبانی از فارسی
       ],
       theme: ThemeData(
-          useMaterial3: true,
-          textTheme: TextTheme(
-              headlineLarge: TextStyle(
-                  fontFamily: "iransans",
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  color: SolidColors.posterTitle),
-              headlineMedium: TextStyle(
-                  fontFamily: "iransans",
-                  fontSize: 12,
-                  fontWeight: FontWeight.w300,
-                  color: SolidColors.posterSubTitle), headlineSmall: TextStyle(
-                  fontFamily: "iransans",
-                  fontSize: 12,
-                  fontWeight: FontWeight.w300,
-                  color: SolidColors.hashTag),bodyMedium: TextStyle(
-                  fontFamily: "iransans",
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  color: SolidColors.blackColor))),
+        inputDecorationTheme: InputDecorationTheme(
+         // filled: true,
+         outlineBorder: BorderSide(color: const Color.fromARGB(255, 103, 194, 0)),
+           
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(16))),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+          //  textStyle: textthem.labelLarge,
+            backgroundColor: (SolidColors.primaryColor),
+            //foregroundColor: Colors.white,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          ),
+        ),
+        useMaterial3: true,
+        textTheme: const TextTheme(
+            headlineLarge: TextStyle(
+                fontFamily: "iransans",
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: SolidColors.posterTitle),
+            headlineMedium: TextStyle(
+                fontFamily: "iransans",
+                fontSize: 12,
+                fontWeight: FontWeight.w300,
+                color: SolidColors.posterSubTitle),
+            headlineSmall: TextStyle(
+                fontFamily: "iransans",
+                fontSize: 12,
+                fontWeight: FontWeight.w300,
+                color: SolidColors.hashTag),
+            bodyMedium: TextStyle(
+                fontFamily: "iransans",
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: SolidColors.blackColor),
+            bodyLarge: TextStyle(
+                fontFamily: "iransans",
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: Color.fromARGB(255, 255, 255, 255)),
+            labelLarge: TextStyle(
+              color: Color.fromARGB(255, 0, 0, 0),
+              fontFamily: "iransans",
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+            labelSmall: TextStyle(
+                fontFamily: "iransans",
+                fontWeight: FontWeight.w600,
+                fontSize: 12,
+                color: Color.fromARGB(255, 219, 219, 219))),
+      ),
       // home: SplashScreen(),
       home: ArticelsIntro(),
     );
