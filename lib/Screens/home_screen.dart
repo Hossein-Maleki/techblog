@@ -21,7 +21,6 @@ class HomeScreen extends StatelessWidget {
       child: SafeArea(
         child: Column(
           children: [
-           
             const SizedBox(
               height: 5,
             ),
@@ -49,29 +48,35 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 7,),
+            const SizedBox(
+              height: 7,
+            ),
             //listview blog
             HomeScreenBlogList(size: size, textthem: textthem),
-        SizedBox(height: 8,)
-                    ,Padding(
-              padding: const EdgeInsets.only(right: 32),
-              child: Row(
-                children: [
-                  Assets.icons.microphon.image(width: 24),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Text(MyStrings.viewHotestPodCasts,
-                      style: textthem.headlineSmall!.apply(
-                        color: SolidColors.seeMore,
-                      ))
-                ]
-              ),
+            SizedBox(
+              height: 8,
             ),
-            const SizedBox(height: 7,),
+            Padding(
+              padding: const EdgeInsets.only(right: 32),
+              child: Row(children: [
+                Assets.icons.microphon.image(width: 24),
+                const SizedBox(
+                  width: 5,
+                ),
+                Text(MyStrings.viewHotestPodCasts,
+                    style: textthem.headlineSmall!.apply(
+                      color: SolidColors.seeMore,
+                    ))
+              ]),
+            ),
+            const SizedBox(
+              height: 7,
+            ),
             //listview podcast
             HomeScreenPodcastList(size: size),
-            SizedBox(height: 60,)
+            SizedBox(
+              height: 60,
+            )
           ],
         ),
       ),
@@ -99,12 +104,12 @@ class HomeScreenBlogList extends StatelessWidget {
             itemBuilder: (context, index) {
               double right = index == 0 ? 32 : 10;
               return Padding(
-               padding: EdgeInsets.fromLTRB(
-                      8,
-                      8,
-                      right,
-                      8,
-                    ),
+                padding: EdgeInsets.fromLTRB(
+                  8,
+                  8,
+                  right,
+                  8,
+                ),
                 child: Column(
                   children: [
                     Stack(
@@ -115,8 +120,7 @@ class HomeScreenBlogList extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30),
                               image: DecorationImage(
-                                  image: Image.network(
-                                          blogList[index].imageUrl)
+                                  image: Image.network(blogList[index].imageUrl)
                                       .image,
                                   fit: BoxFit.cover)),
                           foregroundDecoration: BoxDecoration(
@@ -131,8 +135,7 @@ class HomeScreenBlogList extends StatelessWidget {
                           right: 16,
                           left: 16,
                           child: Row(
-                            mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 blogList[index].writer,
@@ -147,11 +150,14 @@ class HomeScreenBlogList extends StatelessWidget {
                         )
                       ],
                     ),
-            
                     const SizedBox(height: 8),
-                  SizedBox(
-                    width: size.width/2.7,
-                    child: Text(blogList[index].title,overflow: TextOverflow.ellipsis,maxLines: 2,))
+                    SizedBox(
+                        width: size.width / 2.7,
+                        child: Text(
+                          blogList[index].title,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ))
                   ],
                 ),
               );
@@ -177,12 +183,12 @@ class HomeScreenPodcastList extends StatelessWidget {
             itemBuilder: (context, index) {
               double right = index == 0 ? 32 : 10;
               return Padding(
-               padding: EdgeInsets.fromLTRB(
-                      8,
-                      8,
-                      right,
-                      8,
-                    ),
+                padding: EdgeInsets.fromLTRB(
+                  8,
+                  8,
+                  right,
+                  8,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -192,16 +198,14 @@ class HomeScreenPodcastList extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           image: DecorationImage(
-                              image: Image.network(
-                                      podcastList[index].imageUrl)    .image,
-                              
+                              image: Image.network(podcastList[index].imageUrl)
+                                  .image,
                               fit: BoxFit.cover)),
-                    
                     ),
-                  
-            
                     const SizedBox(height: 8),
-                  Text(podcastList[index].title, )
+                    Text(
+                      podcastList[index].title,
+                    )
                   ],
                 ),
               );
@@ -229,31 +233,47 @@ class HomescreenTagList extends StatelessWidget {
           itemCount: tagList.length,
           itemBuilder: (context, index) {
             double right = index == 0 ? 32 : 10;
-            return Padding(
-              padding: EdgeInsets.fromLTRB(8, 8, right, 8),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    gradient:
-                        const LinearGradient(colors: GradientColors.tags)),
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      Assets.icons.hashtagicon.image(width: 12),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        tagList[index].title,
-                        style: textthem.headlineSmall,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            );
+            return MainTags(right: right, textthem: textthem, index: index);
           }),
+    );
+  }
+}
+
+class MainTags extends StatelessWidget {
+  const MainTags(
+      {super.key,
+      required this.right,
+      required this.textthem,
+      required this.index});
+
+  final double right;
+  final TextTheme textthem;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(8, 8, right, 8),
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            gradient: const LinearGradient(colors: GradientColors.tags)),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            children: [
+              Assets.icons.hashtagicon.image(width: 12),
+              const SizedBox(
+                width: 5,
+              ),
+              Text(
+                tagList[index].title,
+                style: textthem.headlineSmall,
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

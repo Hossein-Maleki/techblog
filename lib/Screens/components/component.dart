@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:techblog/constans/const_colors.dart';
+import 'package:techblog/gen/assets.gen.dart';
+import 'package:techblog/models/fake_data/data.dart';
 
 class TechDivider extends StatelessWidget {
   const TechDivider({
@@ -16,6 +18,37 @@ class TechDivider extends StatelessWidget {
       endIndent: size.width / 6,
       indent: size.width / 6,
       color: SolidColors.dividerColor,
+    );
+  }
+}
+
+class MainTags extends StatelessWidget {
+  const MainTags({super.key, required this.textthem, required this.index});
+
+  final TextTheme textthem;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          gradient: const LinearGradient(colors: GradientColors.tags)),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          children: [
+            Assets.icons.hashtagicon.image(width: 12),
+            const SizedBox(
+              width: 5,
+            ),
+            Text(
+              tagList[index].title,
+              style: textthem.headlineSmall,
+            )
+          ],
+        ),
+      ),
     );
   }
 }
