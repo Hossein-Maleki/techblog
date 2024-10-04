@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:techblog/Screens/home_screen.dart';
 import 'package:techblog/Screens/profilescreen.dart';
 import 'package:techblog/constans/const_colors.dart';
+import 'package:techblog/constans/const_strings.dart';
 import 'package:techblog/gen/assets.gen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -19,11 +22,29 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var textthem = Theme.of(context).textTheme;
- 
 
     return Scaffold(
+      drawer: Drawer(
+        backgroundColor: SolidColors.scaffoldBg,
+        child: ListView(
+          children: [
+            DrawerHeader(
+                child: Image.asset(
+              Assets.images.logo.path,
+              scale: 3,
+            )),
+            ListTile(title: Text("پروفایل کاربری")),
+            Divider(),
+            ListTile(onTap: () => {}, title: Text(" درباره تک‌بلاگ")),
+            Divider(),
+            ListTile(title: Text(" اشتراک گذاری تک بلاگ")),
+            Divider(),
+            ListTile(title: Text("تک‌بلاگ در گیت هاب"))
+          ],
+        ),
+      ),
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         title: Row(
           textDirection: TextDirection.ltr,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -40,12 +61,12 @@ class _MainScreenState extends State<MainScreen> {
       body: Stack(children: [
         Positioned.fill(
           child: IndexedStack(
-                    index: selectedPageIndex,
-                    children: [
-          HomeScreen(size: size, textthem: textthem),
-          Center(child: profilescreen(size: size, textthem: textthem))
-                    ],
-                  ),
+            index: selectedPageIndex,
+            children: [
+              HomeScreen(size: size, textthem: textthem),
+              Center(child: profilescreen(size: size, textthem: textthem))
+            ],
+          ),
         ),
         ButtonNavigator(
           size: size,

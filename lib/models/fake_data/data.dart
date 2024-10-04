@@ -14,7 +14,7 @@ List<HashTagModel> tagList = [
 ];
 
 List<HashTagModel> selectedTags = [];
-
+ 
 List<BlogModel> blogList = [
   BlogModel(
       id: 1,

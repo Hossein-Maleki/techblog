@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:techblog/Screens/articels_intro.dart';
+import 'package:techblog/Screens/home_screen.dart';
+import 'package:techblog/Screens/splash_screen.dart';
 import 'package:techblog/constans/const_colors.dart';
 
 void main() {
@@ -19,6 +21,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textthem = Theme.of(context).textTheme;
+    
+    var size = MediaQuery.of(context).size;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
@@ -86,7 +90,7 @@ class MyApp extends StatelessWidget {
                 color: Color.fromARGB(255, 219, 219, 219))),
       ),
       // home: SplashScreen(),
-      home: ArticelsIntro(),
+      home:  SplashScreen(),
     );
   }
 }
