@@ -2,21 +2,25 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:techblog/Screens/articels_intro.dart';
 import 'package:techblog/Screens/home_screen.dart';
 import 'package:techblog/Screens/profilescreen.dart';
 import 'package:techblog/constans/const_colors.dart';
 import 'package:techblog/constans/const_strings.dart';
+import 'package:techblog/constans/global_functon.dart';
 import 'package:techblog/gen/assets.gen.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+ 
 
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
+final GlobalKey<ScaffoldState> _key = GlobalKey();
 
-class _MainScreenState extends State<MainScreen> {
-  var selectedPageIndex = 0;
+class MainScreen extends StatelessWidget {
+  Rx selectedPageIndex = 0.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +28,7 @@ class _MainScreenState extends State<MainScreen> {
     var textthem = Theme.of(context).textTheme;
 
     return Scaffold(
+      key: _key,
       drawer: Drawer(
         backgroundColor: SolidColors.scaffoldBg,
         child: ListView(
@@ -33,18 +38,24 @@ class _MainScreenState extends State<MainScreen> {
               Assets.images.logo.path,
               scale: 3,
             )),
-            ListTile(title: Text("پروفایل کاربری")),
-            Divider(),
+            const ListTile(title: Text("پروفایل کاربری")),
+            const Divider(),
             ListTile(onTap: () => {}, title: Text(" درباره تک‌بلاگ")),
-            Divider(),
-            ListTile(title: Text(" اشتراک گذاری تک بلاگ")),
-            Divider(),
-            ListTile(title: Text("تک‌بلاگ در گیت هاب"))
+            const Divider(),
+            ListTile(
+                onTap: () async {
+                  await Share.share(MyStrings.shareText);
+                },
+                title:  Text(MyStrings.shareTec)),
+            const Divider(),
+             ListTile(
+              onTap:  () => myLaunchUrl(MyStrings.techBlogGithubUrl),
+              title: Text("تک‌بلاگ در گیت هاب"))
           ],
         ),
       ),
       appBar: AppBar(
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false,
         title: Row(
           textDirection: TextDirection.ltr,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -53,26 +64,29 @@ class _MainScreenState extends State<MainScreen> {
               CupertinoIcons.search,
             ),
             Assets.images.logo.image(height: size.height / 13.6),
-            Icon(Icons.menu)
+            IconButton(
+                onPressed: () {
+                  _key.currentState!.openDrawer();
+                },
+                icon: Icon(Icons.menu))
           ],
         ),
       ),
       backgroundColor: SolidColors.scaffoldBg,
       body: Stack(children: [
         Positioned.fill(
-          child: IndexedStack(
-            index: selectedPageIndex,
+          child:Obx(()=> IndexedStack(
+            index: selectedPageIndex.value,
             children: [
               HomeScreen(size: size, textthem: textthem),
+              ArticelsIntro(),
               Center(child: profilescreen(size: size, textthem: textthem))
             ],
-          ),
+          ),)
         ),
         ButtonNavigator(
           size: size,
-          chengepage: (int valeu) => setState(() {
-            selectedPageIndex = valeu;
-          }),
+           changePage: (int valeu) =>   selectedPageIndex.value = valeu
         )
       ]),
     );
@@ -80,12 +94,14 @@ class _MainScreenState extends State<MainScreen> {
 }
 
 class ButtonNavigator extends StatelessWidget {
-  ButtonNavigator({super.key, required this.size, required this.chengepage});
+  ButtonNavigator({super.key, required this.size, required this. changePage});
 
   final Size size;
-  final Function(int) chengepage;
+ final void Function(int) changePage;
+
   @override
   Widget build(BuildContext context) {
+      
     return Positioned(
       bottom: 0,
       right: 0,
@@ -108,13 +124,13 @@ class ButtonNavigator extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 InkWell(
-                    onTap: () => chengepage(1),
+                    onTap: () =>  changePage(2),
                     child: Assets.icons.user.image(width: 32)),
                 InkWell(
-                    onTap: () => chengepage(2),
+                    onTap: () => changePage(1),
                     child: Assets.icons.write.image(width: 32)),
                 InkWell(
-                    onTap: () => chengepage(0),
+                    onTap: () =>  changePage(0),
                     child: Assets.icons.home.image(width: 32))
               ],
             ),

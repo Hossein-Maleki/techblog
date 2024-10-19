@@ -5,8 +5,10 @@ import 'package:techblog/Screens/articels_intro.dart';
 import 'package:techblog/Screens/home_screen.dart';
 import 'package:techblog/Screens/splash_screen.dart';
 import 'package:techblog/constans/const_colors.dart';
+import 'package:techblog/constans/global_functon.dart';
 
 void main() {
+
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       systemNavigationBarIconBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.dark,
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textthem = Theme.of(context).textTheme;
-    
+
     var size = MediaQuery.of(context).size;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -36,14 +38,14 @@ class MyApp extends StatelessWidget {
       ],
       theme: ThemeData(
         inputDecorationTheme: InputDecorationTheme(
-         // filled: true,
-         outlineBorder: BorderSide(color: const Color.fromARGB(255, 103, 194, 0)),
-           
+            // filled: true,
+            outlineBorder:
+                BorderSide(color: const Color.fromARGB(255, 103, 194, 0)),
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(16))),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-          //  textStyle: textthem.labelLarge,
+            //  textStyle: textthem.labelLarge,
             backgroundColor: (SolidColors.primaryColor),
             //foregroundColor: Colors.white,
             shape:
@@ -90,7 +92,7 @@ class MyApp extends StatelessWidget {
                 color: Color.fromARGB(255, 219, 219, 219))),
       ),
       // home: SplashScreen(),
-      home:  SplashScreen(),
+      home: SplashScreen(),
     );
   }
 }
