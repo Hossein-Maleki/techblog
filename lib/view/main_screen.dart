@@ -1,19 +1,18 @@
-import 'dart:io';
+ 
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:techblog/Screens/articels_intro.dart';
-import 'package:techblog/Screens/home_screen.dart';
-import 'package:techblog/Screens/profilescreen.dart';
+import 'package:techblog/view/articels_intro.dart';
+import 'package:techblog/view/home_screen.dart';
+import 'package:techblog/view/profilescreen.dart';
 import 'package:techblog/constans/const_colors.dart';
 import 'package:techblog/constans/const_strings.dart';
-import 'package:techblog/constans/global_functon.dart';
+ 
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:techblog/service/lunch-url.dart';
+ 
 
  
 

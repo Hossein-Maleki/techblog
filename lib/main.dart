@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:techblog/Screens/articels_intro.dart';
-import 'package:techblog/Screens/home_screen.dart';
-import 'package:techblog/Screens/splash_screen.dart';
+import 'package:techblog/constans/api_constant.dart';
+import 'package:techblog/service/api-provider.dart';
+import 'package:techblog/view/home_screen.dart';
+ 
+import 'package:techblog/view/splash_screen.dart';
 import 'package:techblog/constans/const_colors.dart';
-import 'package:techblog/constans/global_functon.dart';
+  
 
 void main() {
-
+ getHomeItems() async {
+    var respons = await ApiProvider().getMetod(ApiUrlConstant.getHomeItems);
+    print(respons);
+  }
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       systemNavigationBarIconBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.dark,
