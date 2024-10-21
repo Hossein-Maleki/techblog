@@ -1,17 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:techblog/constans/const_colors.dart';
 import 'package:techblog/constans/const_strings.dart';
+import 'package:techblog/controller/home-screen-controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/models/fake_data/data.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({
+  HomeScreen({
     super.key,
     required this.size,
     required this.textthem,
   });
-
+  HomeSreenController _homeSreenController = Get.put(HomeSreenController());
   final Size size;
   final TextTheme textthem;
 
@@ -52,7 +54,7 @@ class HomeScreen extends StatelessWidget {
               height: 7,
             ),
             //listview blog
-            HomeScreenBlogList(size: size, textthem: textthem),
+          topArticelsGen(),
             SizedBox(
               height: 8,
             ),
@@ -82,86 +84,76 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-class HomeScreenBlogList extends StatelessWidget {
-  const HomeScreenBlogList({
-    super.key,
-    required this.size,
-    required this.textthem,
-  });
-
-  final Size size;
-  final TextTheme textthem;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget topArticelsGen() {
     return SizedBox(
         height: size.height / 3.8,
-        child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: blogList.length,
-            itemBuilder: (context, index) {
-              double right = index == 0 ? 32 : 10;
-              return Padding(
-                padding: EdgeInsets.fromLTRB(
-                  8,
-                  8,
-                  right,
-                  8,
-                ),
-                child: Column(
-                  children: [
-                    Stack(
-                      children: [
-                        Container(
-                          height: size.height / 5.5,
-                          width: size.width / 2.7,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              image: DecorationImage(
-                                  image: Image.network(blogList[index].imageUrl)
-                                      .image,
-                                  fit: BoxFit.cover)),
-                          foregroundDecoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              gradient: const LinearGradient(
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter,
-                                  colors: GradientColors.blogPost)),
-                        ),
-                        Positioned(
-                          bottom: 14,
-                          right: 16,
-                          left: 16,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                blogList[index].writer,
-                                style: textthem.headlineSmall,
-                              ),
-                              Text(
-                                blogList[index].views + " " + "like",
-                                style: textthem.headlineSmall,
-                              ),
-                            ],
+        child: Obx(
+          ()=> ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount:   _homeSreenController.topArticelsList.length,
+              itemBuilder: (context, index) {
+                double right = index == 0 ? 32 : 10;
+                return Padding(
+                  padding: EdgeInsets.fromLTRB(
+                    8,
+                    8,
+                    right,
+                    8,
+                  ),
+                  child: Column(
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                            height: size.height / 5.5,
+                            width: size.width / 2.7,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                image: DecorationImage(
+                                    image: Image.network(  _homeSreenController.topArticelsList[index].image!)
+                                        .image,
+                                    fit: BoxFit.cover)),
+                            foregroundDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                gradient: const LinearGradient(
+                                    begin: Alignment.bottomCenter,
+                                    end: Alignment.topCenter,
+                                    colors: GradientColors.blogPost)),
                           ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    SizedBox(
-                        width: size.width / 2.7,
-                        child: Text(
-                          blogList[index].title,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ))
-                  ],
-                ),
-              );
-            }));
+                          Positioned(
+                            bottom: 14,
+                            right: 16,
+                            left: 16,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  _homeSreenController.topArticelsList[index].author!,
+                                  style: textthem.headlineSmall,
+                                ),
+                                Text(
+                                 _homeSreenController.topArticelsList[index].view!,
+                                  style: textthem.headlineSmall,
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      SizedBox(
+                          width: size.width / 2.7,
+                          child: Text(
+                          _homeSreenController.topArticelsList[index].title!,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ))
+                    ],
+                  ),
+                );
+              }),
+        ));
   }
 }
 
