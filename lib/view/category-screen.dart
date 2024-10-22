@@ -6,7 +6,7 @@ import 'package:techblog/constans/const_colors.dart';
 import 'package:techblog/constans/const_strings.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/models/fake_data/data.dart';
-import 'package:techblog/models/fake_data/hashtag_model.dart';
+ 
 
 class Categorys extends StatefulWidget {
   const Categorys({super.key});

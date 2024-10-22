@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
               height: 7,
             ),
             //listview blog
-          topArticelsGen(),
+          genTopArticelsList(),
             SizedBox(
               height: 8,
             ),
@@ -75,7 +75,7 @@ class HomeScreen extends StatelessWidget {
               height: 7,
             ),
             //listview podcast
-            HomeScreenPodcastList(size: size),
+           genTopPdcastList(),
             SizedBox(
               height: 60,
             )
@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget topArticelsGen() {
+  Widget genTopArticelsList() {
     return SizedBox(
         height: size.height / 3.8,
         child: Obx(
@@ -155,55 +155,51 @@ class HomeScreen extends StatelessWidget {
               }),
         ));
   }
-}
 
-class HomeScreenPodcastList extends StatelessWidget {
-  const HomeScreenPodcastList({
-    super.key,
-    required this.size,
-  });
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
+Widget genTopPdcastList(){
+     return SizedBox(
         height: size.height / 3.8,
-        child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: podcastList.length,
-            itemBuilder: (context, index) {
-              double right = index == 0 ? 32 : 10;
-              return Padding(
-                padding: EdgeInsets.fromLTRB(
-                  8,
-                  8,
-                  right,
-                  8,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: size.height / 5.5,
-                      width: size.width / 2.7,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          image: DecorationImage(
-                              image: Image.network(podcastList[index].imageUrl)
-                                  .image,
-                              fit: BoxFit.cover)),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      podcastList[index].title,
-                    )
-                  ],
-                ),
-              );
-            }));
+        child:   Obx(
+          ()=> ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: _homeSreenController.topPodcastList.length,
+              itemBuilder: (context, index) {
+                double right = index == 0 ? 32 : 10;
+                return Padding(
+                  padding: EdgeInsets.fromLTRB(
+                    8,
+                    8,
+                    right,
+                    8,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: size.height / 5.5,
+                        width: size.width / 2.7,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            image: DecorationImage(
+                                image: Image.network( _homeSreenController.topPodcastList[index].poster!)
+                                    .image,
+                                fit: BoxFit.cover)),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                       _homeSreenController.topPodcastList[index].title!,
+                      )
+                    ],
+                  ),
+                );
+              }),
+        ));
   }
 }
+
+ 
+
+ 
 
 class HomescreenTagList extends StatelessWidget {
   const HomescreenTagList({
