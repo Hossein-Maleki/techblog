@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:techblog/constans/const_colors.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/models/fake_data/data.dart';
@@ -54,3 +55,11 @@ class MainTags extends StatelessWidget {
 }
 
  
+ 
+Widget genLoding(){
+  return SpinKitThreeInOut(
+      color: SolidColors.primaryColor.withOpacity(0.5),
+      size: 26,
+    );
+
+}

@@ -4,13 +4,15 @@ import 'package:get/get.dart';
 import 'package:techblog/constans/api_constant.dart';
 import 'package:techblog/models/article_model.dart';
 import 'package:techblog/models/podcast_model.dart';
+import 'package:techblog/models/poster-model.dart';
 
 import 'package:techblog/service/api-provider.dart';
 
 class HomeSreenController extends GetxController {
-  late Rx posterModel;
+  late Rx<PosterModel> postermodel = PosterModel().obs;
   RxList<ArticleModel> topArticelsList = RxList();
   RxList<PodcastModel> topPodcastList = RxList();
+  RxBool isLoading = false.obs;
 
   onInit() {
     super.onInit();
@@ -27,7 +29,11 @@ class HomeSreenController extends GetxController {
       response.data["top_podcasts"].forEach((element) {
         topPodcastList.add(PodcastModel.fromJson(element));
       });
-     print(response.data["top_podcasts"]);
+      postermodel.value = response.data["poster"].forEach((element) {
+        PosterModel.fromJson(element);
+      });
+      isLoading.value = true;
+      log(response.data["poster"]);
     } else {
       print('Error: ${response.statusCode}');
     }
