@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:techblog/constans/const_colors.dart';
+import 'package:techblog/controller/home-screen-controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/models/fake_data/data.dart';
+ 
 
 class TechDivider extends StatelessWidget {
   const TechDivider({
@@ -63,3 +67,5 @@ Widget genLoding(){
     );
 
 }
+ 
+ 

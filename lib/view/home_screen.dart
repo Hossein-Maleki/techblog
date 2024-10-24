@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: SafeArea(
-          child: Obx(() => _homeSreenController.isLoading.value
+          child: Obx(() => _homeSreenController.isLoading.value == true
               ? Column(
                   children: [
                     const SizedBox(
@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                       height: 12,
                     ),
                     //list view
-                    HomescreenTagList(size: size, textthem: textthem),
+                    genTagList(),
                     const SizedBox(
                       height: 12,
                     ),
@@ -268,7 +268,7 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    _homeSreenController.postermodel.value.title!,
+                    "حسین ملکی",
                     style: textthem.headlineMedium,
                   ),
                   Text(
@@ -285,8 +285,8 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      "دوازده قدم برنامه نویسی یک دوره ی ..س",
-                      maxLines: 1,
+                      _homeSreenController.postermodel.value.title!,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: textthem.headlineLarge,
                     ),
@@ -299,26 +299,14 @@ class HomeScreen extends StatelessWidget {
       ],
     );
   }
-}
 
-class HomescreenTagList extends StatelessWidget {
-  const HomescreenTagList({
-    super.key,
-    required this.size,
-    required this.textthem,
-  });
-
-  final Size size;
-  final TextTheme textthem;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget genTagList() {
     return SizedBox(
       width: size.width,
       height: size.height / 16,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: tagList.length,
+          itemCount: _homeSreenController.tagsList.length,
           itemBuilder: (context, index) {
             double right = index == 0 ? 32 : 10;
             return MainTags(right: right, textthem: textthem, index: index);
@@ -355,7 +343,7 @@ class MainTags extends StatelessWidget {
                 width: 5,
               ),
               Text(
-                tagList[index].title,
+                Get.find<HomeSreenController>().tagsList[index].title!,
                 style: textthem.headlineSmall,
               )
             ],

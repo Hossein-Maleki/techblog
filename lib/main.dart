@@ -10,10 +10,7 @@ import 'package:techblog/constans/const_colors.dart';
   
 
 void main() {
- getHomeItems() async {
-    var respons = await ApiProvider().getMethod(ApiUrlConstant.getHomeItems);
-    print(respons);
-  }
+
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       systemNavigationBarIconBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.dark,
