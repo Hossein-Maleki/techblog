@@ -40,6 +40,7 @@ class HomeSreenController extends GetxController {
       postermodel.value = PosterModel.fromJson(response.data["poster"]);
       log(response.data["poster"]).toString();
     } else {
+      
     }
   }
 }

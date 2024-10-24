@@ -3,14 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:techblog/constans/api_constant.dart';
 import 'package:techblog/service/api-provider.dart';
-import 'package:techblog/view/home_screen.dart';
- 
+import 'package:techblog/view/main_screen/home_screen.dart';
+
 import 'package:techblog/view/splash_screen.dart';
 import 'package:techblog/constans/const_colors.dart';
-  
 
 void main() {
-
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       systemNavigationBarIconBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.dark,
@@ -81,6 +79,11 @@ class MyApp extends StatelessWidget {
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
                 color: Color.fromARGB(255, 255, 255, 255)),
+            bodySmall: TextStyle(
+                fontFamily: "iransans",
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: Color.fromARGB(180, 97, 97, 97)),
             labelLarge: TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontFamily: "iransans",

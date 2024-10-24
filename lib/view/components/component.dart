@@ -7,7 +7,6 @@ import 'package:techblog/constans/const_colors.dart';
 import 'package:techblog/controller/home-screen-controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/models/fake_data/data.dart';
- 
 
 class TechDivider extends StatelessWidget {
   const TechDivider({
@@ -58,14 +57,41 @@ class MainTags extends StatelessWidget {
   }
 }
 
- 
- 
-Widget genLoding(){
+Widget genLoding() {
   return SpinKitThreeInOut(
-      color: SolidColors.primaryColor.withOpacity(0.5),
-      size: 26,
-    );
-
+    color: SolidColors.primaryColor.withOpacity(0.5),
+    size: 26,
+  );
 }
- 
- 
+
+PreferredSize genAppBar(String title) {
+  return PreferredSize(
+      preferredSize: Size.fromHeight(80),
+      child: Padding(
+          padding: const EdgeInsets.fromLTRB(18, 14, 18, 14),
+          child: AppBar(
+             
+            primary: true,
+            centerTitle: true,
+
+            automaticallyImplyLeading: true,
+            actions: [
+              Text(title,
+                  style: TextStyle(
+                    // color: SolidColors.primaryColor
+                    fontSize: 18,
+                  ))
+            ],
+            leading: Container(
+              height: 50,
+              width: 50,
+              decoration: const BoxDecoration(
+                  shape: BoxShape.circle, color: SolidColors.primaryColor),
+              child: Icon(
+                Icons.arrow_back_ios_new,
+                size: 22,
+                color: SolidColors.lightIcon,
+              ),
+            ),
+          )));
+}
