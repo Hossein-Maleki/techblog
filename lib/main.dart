@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get.dart';
 import 'package:techblog/constans/api_constant.dart';
 import 'package:techblog/service/api-provider.dart';
 import 'package:techblog/view/main_screen/home_screen.dart';
@@ -25,17 +26,10 @@ class MyApp extends StatelessWidget {
     var textthem = Theme.of(context).textTheme;
 
     var size = MediaQuery.of(context).size;
-    return MaterialApp(
+    return GetMaterialApp(
+      locale:  const Locale('fa', ''),
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: [
-        //  const Locale('en', ''), // پشتیبانی از انگلیسی
-        const Locale('fa', ''), // پشتیبانی از فارسی
-      ],
+ 
       theme: ThemeData(
         inputDecorationTheme: InputDecorationTheme(
             // filled: true,

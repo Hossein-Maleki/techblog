@@ -5,7 +5,6 @@ import 'package:techblog/service/api-provider.dart';
 
 class ArticelsListController extends GetxController {
   RxList<ArticleModel> ArticelsList = RxList();
-
  
 
   @override
@@ -15,10 +14,10 @@ class ArticelsListController extends GetxController {
   }
 
   getHomeItems() async {
+   
     var response = await ApiProvider().getMethod(ApiUrlConstant.getArticleList);
-
+ 
     if (response.statusCode == 200) {
-      
       response.data.forEach((element) {
         ArticelsList.add(ArticleModel.fromJson(element));
       });
