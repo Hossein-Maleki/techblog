@@ -70,7 +70,8 @@ class _CategorysState extends State<Categorys> {
                               print("object");
                             }
                           }),
-                      child: MainTags(textthem: textthem, index: index))),
+                      
+                      child: MainTags(textthem: textthem, index: index, right:index == 0 ? 32 : 10))),
             ),
             const SizedBox(
               height: 18,

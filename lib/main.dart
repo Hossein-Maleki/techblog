@@ -27,9 +27,9 @@ class MyApp extends StatelessWidget {
 
     var size = MediaQuery.of(context).size;
     return GetMaterialApp(
-      locale:  const Locale('fa', ''),
+      locale: const Locale('fa', ''),
       debugShowCheckedModeBanner: false,
- 
+
       theme: ThemeData(
         inputDecorationTheme: InputDecorationTheme(
             // filled: true,
@@ -88,7 +88,12 @@ class MyApp extends StatelessWidget {
                 fontFamily: "iransans",
                 fontWeight: FontWeight.w600,
                 fontSize: 12,
-                color: Color.fromARGB(255, 219, 219, 219))),
+                color: Color.fromARGB(255, 219, 219, 219)),
+            titleLarge: TextStyle(
+                fontFamily: "iransans",
+                fontWeight: FontWeight.w600,
+                fontSize: 18,
+                color: Color.fromARGB(255, 0, 0, 0))),
       ),
       // home: SplashScreen(),
       home: SplashScreen(),

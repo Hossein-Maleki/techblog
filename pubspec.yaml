@@ -43,7 +43,9 @@ dependencies:
   get: ^4.6.6
   dio: ^5.7.0
   cached_network_image: ^3.4.1
- 
+  flutter_widget_from_html: ^0.15.2
+  webview_flutter: ^4.0.0
+
 
 dev_dependencies:
   flutter_test:
