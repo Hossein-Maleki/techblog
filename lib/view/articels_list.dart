@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,12 +7,25 @@ import 'package:get/get.dart';
 import 'package:techblog/constans/api_constant.dart';
 import 'package:techblog/constans/const_colors.dart';
 import 'package:techblog/controller/articels-list-controller.dart';
+import 'package:techblog/controller/singel_articels_controller.dart';
 import 'package:techblog/view/components/component.dart';
+import 'package:techblog/view/singel_articels.dart';
 
-class ArticelsListScreen extends StatelessWidget {
+class ArticelsListScreen extends StatefulWidget {
   ArticelsListScreen({super.key});
+
+  @override
+  State<ArticelsListScreen> createState() => _ArticelsListScreenState();
+}
+
+class _ArticelsListScreenState extends State<ArticelsListScreen> {
   ArticelsListController _articelsListController =
       Get.put(ArticelsListController());
+
+  SingelArticelsController _singelArticelsController =
+      Get.put(SingelArticelsController());
+
+
   @override
   Widget build(BuildContext context) {
     var texttheme = Theme.of(context).textTheme;
@@ -22,7 +37,17 @@ class ArticelsListScreen extends StatelessWidget {
           child: Obx(
             () => ListView.builder(
                 itemCount: _articelsListController.ArticelsList.length,
-                itemBuilder: (context, index) => Padding(
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: () {
+                      
+                      _singelArticelsController.postIdContoreler.value =
+                          int.parse(
+                              _articelsListController.ArticelsList[index].id!);
+                      _singelArticelsController.getsingelArticel();
+                      Get.to(SingelArticelsScreen());
+                    },
+                    child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start, //
@@ -98,7 +123,9 @@ class ArticelsListScreen extends StatelessWidget {
                           )
                         ],
                       ),
-                    )),
+                    ),
+                  );
+                }),
           )),
     ));
   }
