@@ -58,9 +58,11 @@ class MainTags extends StatelessWidget {
 }
 
 Widget genLoding() {
-  return SpinKitThreeInOut(
-    color: SolidColors.primaryColor.withOpacity(0.5),
-    size: 26,
+  return SizedBox(height: Get.height,
+    child: SpinKitThreeBounce(
+      color: SolidColors.primaryColor.withOpacity(0.8),
+      size: 26,
+    ),
   );
 }
 

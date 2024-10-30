@@ -26,30 +26,33 @@ class _SingelArticelsScreenState extends State<SingelArticelsScreen> {
   SingelArticelsController _singelArticelsController =
       Get.put(SingelArticelsController());
 
-        HomeSreenController _homeSreenController = Get.put(HomeSreenController());
+  HomeSreenController _homeSreenController = Get.put(HomeSreenController());
 
-     @override
+  @override
   void setState(VoidCallback fn) {
     super.setState(fn);
     _singelArticelsController.getsingelArticel();
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var textthem = Theme.of(context).textTheme;
     return SafeArea(
         child: Scaffold(
       body: SingleChildScrollView(
-        child: Obx(
-         ( )=>Column(
+        child:   Obx(
+          () =>
+          
+           _singelArticelsController.singelArticel.value.title==null ? genLoding(): Column(
             children: [
               Stack(
                 children: [
                   CachedNetworkImage(
-                                            imageUrl:   _singelArticelsController.singelArticel.value.image!,
-                                            imageBuilder:
-                                                (context, ImageProvider) => Image(image: ImageProvider)),
+                      imageUrl:
+                          _singelArticelsController.singelArticel.value.image!,
+                      imageBuilder: (context, ImageProvider) =>
+                          Image(image: ImageProvider)),
                   Positioned(
                       top: 0,
                       left: 0,
@@ -92,7 +95,7 @@ class _SingelArticelsScreenState extends State<SingelArticelsScreen> {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                 _singelArticelsController.singelArticel.value.title!,
+                  _singelArticelsController.singelArticel.value.title!,
                   style: textthem.titleLarge,
                 ),
               ),
@@ -104,21 +107,27 @@ class _SingelArticelsScreenState extends State<SingelArticelsScreen> {
                     SizedBox(
                       width: 6,
                     ),
-                    Text(                 _singelArticelsController.singelArticel.value.author!,),
+                    Text(
+                      _singelArticelsController.singelArticel.value.author!,
+                    ),
                     SizedBox(
                       width: 14,
                     ),
-                    Text(                  _singelArticelsController.singelArticel.value.createdAt!, style: textthem.bodySmall),
+                    Text(
+                        _singelArticelsController
+                            .singelArticel.value.createdAt!,
+                        style: textthem.bodySmall),
                   ],
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(26),
                 child: HtmlWidget(
-                                  _singelArticelsController.singelArticel.value.content!,
+                  _singelArticelsController.singelArticel.value.content!,
                   textStyle: articelsTextTheme,
                 ),
               ),
+              //tagList view
               Padding(
                 padding: const EdgeInsets.only(right: 32),
                 child: SizedBox(
@@ -169,95 +178,109 @@ class _SingelArticelsScreenState extends State<SingelArticelsScreen> {
                       ],
                     ),
                   ),
+                  //related  ListView
                   SizedBox(
                       height: size.height / 3.8,
                       child: Obx(
                         () => ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount:
-                                _homeSreenController.topArticelsList.length,
+                                _singelArticelsController.related.length,
                             itemBuilder: (context, index) {
                               double right = index == 0 ? 32 : 10;
-                              return Padding(
-                                padding: EdgeInsets.fromLTRB(
-                                  8,
-                                  8,
-                                  right,
-                                  8,
-                                ),
-                                child: Column(
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        Container(
-                                          height: size.height / 5.5,
-                                          width: size.width / 2.7,
-                                          child: CachedNetworkImage(
-                                            imageUrl: _homeSreenController
-                                                .topArticelsList[index].image!,
-                                            imageBuilder:
-                                                (context, ImageProvider) =>
-                                                    Container(
-                                              decoration: BoxDecoration(
+                              return InkWell(
+                                onTap: () {
+                                  _singelArticelsController.postIdContoreler.value= int.parse(_homeSreenController.topArticelsList[index].id!);
+                                       _singelArticelsController.getsingelArticel();
+                                       
+                             Get.to(SingelArticelsScreen());
+                                },
+                              
+                              child: Padding(
+                                  padding: EdgeInsets.fromLTRB(
+                                    8,
+                                    8,
+                                    right,
+                                    8,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Stack(
+                                        children: [
+                                          Container(
+                                            height: size.height / 5.5,
+                                            width: size.width / 2.7,
+                                            child: CachedNetworkImage(
+                                              imageUrl:   _singelArticelsController.related[index].image!,
+                                              imageBuilder:
+                                                  (context, ImageProvider) =>
+                                                      Container(
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(30),
+                                                    image: DecorationImage(
+                                                        image: ImageProvider,
+                                                        fit: BoxFit.cover)),
+                                                foregroundDecoration:
+                                                    BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(30),
-                                                  image: DecorationImage(
-                                                      image: ImageProvider,
-                                                      fit: BoxFit.cover)),
-                                              foregroundDecoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                                gradient: const LinearGradient(
-                                                    begin: Alignment.bottomCenter,
-                                                    end: Alignment.topCenter,
-                                                    colors:
-                                                        GradientColors.blogPost),
+                                                  gradient: const LinearGradient(
+                                                      begin:
+                                                          Alignment.bottomCenter,
+                                                      end: Alignment.topCenter,
+                                                      colors: GradientColors
+                                                          .blogPost),
+                                                ),
+                                              ),
+                                              placeholder: (context, url) =>
+                                                  genLoding(),
+                                              errorWidget:
+                                                  (context, url, error) => Icon(
+                                                Icons
+                                                    .image_not_supported_outlined,
+                                                color: Colors.black26,
+                                                size: 36,
                                               ),
                                             ),
-                                            placeholder: (context, url) =>
-                                                genLoding(),
-                                            errorWidget: (context, url, error) =>
-                                                Icon(
-                                              Icons.image_not_supported_outlined,
-                                              color: Colors.black26,
-                                              size: 36,
+                                          ),
+                                          Positioned(
+                                            bottom: 14,
+                                            right: 16,
+                                            left: 16,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Text(
+                                                  _singelArticelsController
+                                                      .related[index]
+                                                      .author!,
+                                                  style: textthem.headlineSmall,
+                                                ),
+                                                Text(
+                                                 _singelArticelsController
+                                                      .related[index]
+                                                      .view!,
+                                                  style: textthem.headlineSmall,
+                                                ),
+                                              ],
                                             ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          bottom: 14,
-                                          right: 16,
-                                          left: 16,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                _homeSreenController
-                                                    .topArticelsList[index]
-                                                    .author!,
-                                                style: textthem.headlineSmall,
-                                              ),
-                                              Text(
-                                                _homeSreenController
-                                                    .topArticelsList[index].view!,
-                                                style: textthem.headlineSmall,
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    const SizedBox(height: 8),
-                                    SizedBox(
-                                        width: size.width / 2.7,
-                                        child: Text(
-                                          _homeSreenController
-                                              .topArticelsList[index].title!,
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                        ))
-                                  ],
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(height: 8),
+                                      SizedBox(
+                                          width: size.width / 2.7,
+                                          child: Text(
+                                        _singelArticelsController
+                                                      .related[index]
+                                                      .title!,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
+                                          ))
+                                    ],
+                                  ),
                                 ),
                               );
                             }),

@@ -25,7 +25,6 @@ class _ArticelsListScreenState extends State<ArticelsListScreen> {
   SingelArticelsController _singelArticelsController =
       Get.put(SingelArticelsController());
 
-
   @override
   Widget build(BuildContext context) {
     var texttheme = Theme.of(context).textTheme;
@@ -40,11 +39,11 @@ class _ArticelsListScreenState extends State<ArticelsListScreen> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      
                       _singelArticelsController.postIdContoreler.value =
                           int.parse(
                               _articelsListController.ArticelsList[index].id!);
                       _singelArticelsController.getsingelArticel();
+                 
                       Get.to(SingelArticelsScreen());
                     },
                     child: Padding(
