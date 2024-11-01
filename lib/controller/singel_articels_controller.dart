@@ -6,6 +6,7 @@ import 'package:techblog/models/singel_articels.dart';
 import 'package:techblog/models/tags.model.dart';
 
 import 'package:techblog/service/api-provider.dart';
+import 'package:techblog/view/singel_articels.dart';
 
 class SingelArticelsController extends GetxController {
   RxInt postIdContoreler = RxInt(0);
@@ -13,12 +14,12 @@ class SingelArticelsController extends GetxController {
   RxList<ArticleModel> related = RxList();
   RxList<TagsModel> tagslist = RxList();
 
-  getsingelArticel() async {
+  getsingelArticel(String id) async {
     singelArticel = SingelArticelsModel()
         .obs; //this line clean data model in singelarticels that already initialaze
-    var id = "";
+
     var response = await ApiProvider().getMethod(
-        '${ApiUrlConstant.baseUrl}article/get.php?command=info&id= $postIdContoreler&user_id=$id');
+        '${ApiUrlConstant.baseUrl}article/get.php?command=info&id= $id&user_id=$id');
 
     if (response.statusCode == 200) {
 //TODO clearthis
@@ -32,6 +33,7 @@ class SingelArticelsController extends GetxController {
         tagslist.add(TagsModel.fromjson(elment));
       });
       // print(response.data.toString());
+      Get.to(SingelArticelsScreen());
     }
   }
 }

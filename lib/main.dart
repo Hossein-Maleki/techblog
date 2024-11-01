@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:techblog/constans/api_constant.dart';
 import 'package:techblog/service/api-provider.dart';
+import 'package:techblog/view/articels_list.dart';
 import 'package:techblog/view/main_screen/home_screen.dart';
 
 import 'package:techblog/view/splash_screen.dart';
@@ -96,7 +97,7 @@ class MyApp extends StatelessWidget {
                 color: Color.fromARGB(255, 0, 0, 0))),
       ),
       // home: SplashScreen(),
-      home: SplashScreen(),
+      home:  ArticelsListScreen(appbarTitle:  " مقالات جدید"),
     );
   }
 }

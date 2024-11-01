@@ -11,14 +11,10 @@ import 'package:techblog/controller/singel_articels_controller.dart';
 import 'package:techblog/view/components/component.dart';
 import 'package:techblog/view/singel_articels.dart';
 
-class ArticelsListScreen extends StatefulWidget {
-  ArticelsListScreen({super.key});
+class ArticelsListScreen extends StatelessWidget {
+  String? appbarTitle;
+  ArticelsListScreen( {super.key, required this.appbarTitle});
 
-  @override
-  State<ArticelsListScreen> createState() => _ArticelsListScreenState();
-}
-
-class _ArticelsListScreenState extends State<ArticelsListScreen> {
   ArticelsListController _articelsListController =
       Get.put(ArticelsListController());
 
@@ -30,7 +26,7 @@ class _ArticelsListScreenState extends State<ArticelsListScreen> {
     var texttheme = Theme.of(context).textTheme;
     return SafeArea(
         child: Scaffold(
-      appBar: genAppBar(" لیست مقاله ها"),
+      appBar: genAppBar(appbarTitle!),
       body: Container(
           width: 5000, // Get.size.width / 3,,
           child: Obx(
@@ -39,12 +35,10 @@ class _ArticelsListScreenState extends State<ArticelsListScreen> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      _singelArticelsController.postIdContoreler.value =
-                          int.parse(
-                              _articelsListController.ArticelsList[index].id!);
-                      _singelArticelsController.getsingelArticel();
-                 
-                      Get.to(SingelArticelsScreen());
+                      var articelsId =
+                          _articelsListController.ArticelsList[index].id!;
+
+                      _singelArticelsController.getsingelArticel(articelsId);
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(10),

@@ -5,7 +5,7 @@ import 'package:techblog/view/articels_list.dart';
 import 'package:techblog/view/main_screen/main_screen.dart';
 import 'package:techblog/constans/const_colors.dart';
 import 'package:techblog/gen/assets.gen.dart';
-import 'package:techblog/view/singel_articels.dart';
+ 
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(Duration(seconds: 3)).then((value) {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) =>  ArticelsListScreen()));
+          .push(MaterialPageRoute(builder: (context) =>   MainScreen()));
     });
   }
 
