@@ -135,9 +135,9 @@ class _SingelArticelsScreenState extends State<SingelArticelsScreen> {
                   height: size.height / 16,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: tagList.length,
+                      itemCount: 
+                      _singelArticelsController.tagslist.length,
                       itemBuilder: (context, index) {
-                        double right = index == 0 ? 32 : 10;
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
@@ -152,7 +152,7 @@ class _SingelArticelsScreenState extends State<SingelArticelsScreen> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          tagList[index].title,
+                                          _singelArticelsController.tagslist[index].title!,
                                           style: textthem.bodyMedium,
                                         ),
                                       ]))),
@@ -188,15 +188,7 @@ class _SingelArticelsScreenState extends State<SingelArticelsScreen> {
                                 _singelArticelsController.related.length,
                             itemBuilder: (context, index) {
                               double right = index == 0 ? 32 : 10;
-                              return InkWell(
-                                onTap: () {
-                                  _singelArticelsController.postIdContoreler.value= int.parse(_homeSreenController.topArticelsList[index].id!);
-                                       _singelArticelsController.getsingelArticel();
-                                       
-                             Get.to(SingelArticelsScreen());
-                                },
-                              
-                              child: Padding(
+                              return Padding(
                                   padding: EdgeInsets.fromLTRB(
                                     8,
                                     8,
@@ -281,8 +273,7 @@ class _SingelArticelsScreenState extends State<SingelArticelsScreen> {
                                           ))
                                     ],
                                   ),
-                                ),
-                              );
+                                );
                             }),
                       )),
                 ],
