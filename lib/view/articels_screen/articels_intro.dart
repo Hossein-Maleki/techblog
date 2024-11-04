@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:techblog/controller/register-controller.dart';
 import 'package:techblog/view/category-screen.dart';
 import 'package:techblog/constans/const_colors.dart';
 import 'package:techblog/constans/const_strings.dart';
@@ -8,14 +10,12 @@ import 'package:techblog/gen/assets.gen.dart';
 import 'package:validators/validators.dart';
 
 class ArticelsIntro extends StatelessWidget {
-  const ArticelsIntro({
+  ArticelsIntro({
     super.key,
   });
-
+  RegisterController _registerController = Get.put(RegisterController());
   @override
   Widget build(BuildContext context) {
-
-    
     var size = MediaQuery.of(context).size;
     var textthem = Theme.of(context).textTheme;
     return SafeArea(
@@ -91,9 +91,9 @@ class ArticelsIntro extends StatelessWidget {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context)
-                              .pushReplacement(MaterialPageRoute(builder: (context) {
-                           return Categorys();
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (context) {
+                            return Categorys();
                           }));
                         },
                         child: Text(
@@ -108,7 +108,6 @@ class ArticelsIntro extends StatelessWidget {
 
   Future<dynamic> showEmailBottomSheet(
       BuildContext context, Size size, TextTheme textthem) {
-         
     return showModalBottomSheet(
         isScrollControlled: true,
         context: context,
@@ -132,7 +131,9 @@ class ArticelsIntro extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(16),
                       child: TextField(
-                        onChanged: (value) => print(value+"status12"+ isEmail(value).toString()),
+                        controller: _registerController.emailController,
+                        onChanged: (value) => print(
+                            value + "status12" + isEmail(value).toString()),
                         style: textthem.bodyMedium,
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
@@ -142,6 +143,7 @@ class ArticelsIntro extends StatelessWidget {
                     ),
                     ElevatedButton(
                         onPressed: () {
+                          _registerController.register();
                           Navigator.of(context).pop();
                           showCodeBottomSheet(context, size, textthem);
                         },

@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:techblog/constans/api_constant.dart';
 import 'package:techblog/models/article_model.dart';
 import 'package:techblog/service/api-provider.dart';
-import 'package:techblog/view/articels_list.dart';
+import 'package:techblog/view/articels_screen/articels_list.dart';
 import 'package:techblog/view/singel_articels.dart';
 
 class ArticelsListController extends GetxController {

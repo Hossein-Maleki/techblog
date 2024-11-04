@@ -13,7 +13,7 @@ import 'package:techblog/controller/home-screen-controller.dart';
 import 'package:techblog/controller/singel_articels_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
  
-import 'package:techblog/view/articels_list.dart';
+import 'package:techblog/view/articels_screen/articels_list.dart';
 import 'package:techblog/view/components/component.dart';
  
 
@@ -192,101 +192,109 @@ class SingelArticelsScreen extends StatelessWidget {
                                       _singelArticelsController.related.length,
                                   itemBuilder: (context, index) {
                                     double right = index == 0 ? 32 : 10;
-                                    return Padding(
-                                      padding: EdgeInsets.fromLTRB(
-                                        8,
-                                        8,
-                                        right,
-                                        8,
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Stack(
-                                            children: [
-                                              Container(
-                                                height: size.height / 5.5,
-                                                width: size.width / 2.7,
-                                                child: CachedNetworkImage(
-                                                  imageUrl:
-                                                      _singelArticelsController
-                                                          .related[index]
-                                                          .image!,
-                                                  imageBuilder: (context,
-                                                          ImageProvider) =>
-                                                      Container(
-                                                    decoration: BoxDecoration(
+                                    return InkWell(
+                                      onTap: () {
+                                           var articelsId =
+                        _singelArticelsController.related[index].id!;
+
+                      _singelArticelsController.getsingelArticel(articelsId);
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                          8,
+                                          8,
+                                          right,
+                                          8,
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Stack(
+                                              children: [
+                                                Container(
+                                                  height: size.height / 5.5,
+                                                  width: size.width / 2.7,
+                                                  child: CachedNetworkImage(
+                                                    imageUrl:
+                                                        _singelArticelsController
+                                                            .related[index]
+                                                            .image!,
+                                                    imageBuilder: (context,
+                                                            ImageProvider) =>
+                                                        Container(
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(30),
+                                                          image: DecorationImage(
+                                                              image:
+                                                                  ImageProvider,
+                                                              fit: BoxFit.cover)),
+                                                      foregroundDecoration:
+                                                          BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(30),
-                                                        image: DecorationImage(
-                                                            image:
-                                                                ImageProvider,
-                                                            fit: BoxFit.cover)),
-                                                    foregroundDecoration:
-                                                        BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30),
-                                                      gradient:
-                                                          const LinearGradient(
-                                                              begin: Alignment
-                                                                  .bottomCenter,
-                                                              end: Alignment
-                                                                  .topCenter,
-                                                              colors:
-                                                                  GradientColors
-                                                                      .blogPost),
+                                                            BorderRadius.circular(
+                                                                30),
+                                                        gradient:
+                                                            const LinearGradient(
+                                                                begin: Alignment
+                                                                    .bottomCenter,
+                                                                end: Alignment
+                                                                    .topCenter,
+                                                                colors:
+                                                                    GradientColors
+                                                                        .blogPost),
+                                                      ),
+                                                    ),
+                                                    placeholder: (context, url) =>
+                                                        genLoding(),
+                                                    errorWidget:
+                                                        (context, url, error) =>
+                                                            Icon(
+                                                      Icons
+                                                          .image_not_supported_outlined,
+                                                      color: Colors.black26,
+                                                      size: 36,
                                                     ),
                                                   ),
-                                                  placeholder: (context, url) =>
-                                                      genLoding(),
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          Icon(
-                                                    Icons
-                                                        .image_not_supported_outlined,
-                                                    color: Colors.black26,
-                                                    size: 36,
+                                                ),
+                                                Positioned(
+                                                  bottom: 14,
+                                                  right: 16,
+                                                  left: 16,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        _singelArticelsController
+                                                            .related[index]
+                                                            .author!,
+                                                        style: textthem
+                                                            .headlineSmall,
+                                                      ),
+                                                      Text(
+                                                        _singelArticelsController
+                                                            .related[index].view!,
+                                                        style: textthem
+                                                            .headlineSmall,
+                                                      ),
+                                                    ],
                                                   ),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                bottom: 14,
-                                                right: 16,
-                                                left: 16,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      _singelArticelsController
-                                                          .related[index]
-                                                          .author!,
-                                                      style: textthem
-                                                          .headlineSmall,
-                                                    ),
-                                                    Text(
-                                                      _singelArticelsController
-                                                          .related[index].view!,
-                                                      style: textthem
-                                                          .headlineSmall,
-                                                    ),
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          const SizedBox(height: 8),
-                                          SizedBox(
-                                              width: size.width / 2.7,
-                                              child: Text(
-                                                _singelArticelsController
-                                                    .related[index].title!,
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 2,
-                                              ))
-                                        ],
+                                                )
+                                              ],
+                                            ),
+                                            const SizedBox(height: 8),
+                                            SizedBox(
+                                                width: size.width / 2.7,
+                                                child: Text(
+                                                  _singelArticelsController
+                                                      .related[index].title!,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  maxLines: 2,
+                                                ))
+                                          ],
+                                        ),
                                       ),
                                     );
                                   }),

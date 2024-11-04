@@ -6,10 +6,13 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:techblog/constans/const_colors.dart';
 import 'package:techblog/constans/const_strings.dart';
+import 'package:techblog/controller/articels-list-controller.dart';
 import 'package:techblog/controller/home-screen-controller.dart';
+import 'package:techblog/controller/singel_articels_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/models/fake_data/data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:techblog/view/articels_screen/articels_list.dart';
 import 'package:techblog/view/components/component.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -18,6 +21,10 @@ class HomeScreen extends StatelessWidget {
     required this.size,
     required this.textthem,
   });
+  ArticelsListController _articelsListController =
+      Get.put(ArticelsListController());
+  SingelArticelsController _singelArticelsController =
+      Get.put(SingelArticelsController());
   HomeSreenController _homeSreenController = Get.put(HomeSreenController());
   final Size size;
   final TextTheme textthem;
@@ -41,19 +48,23 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(
                       height: 12,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 32),
-                      child: Row(
-                        children: [
-                          Assets.icons.bluePen.image(width: 24),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Text(MyStrings.viewHotestBlog,
-                              style: textthem.headlineSmall!.apply(
-                                color: SolidColors.seeMore,
-                              ))
-                        ],
+                    InkWell(
+                      onTap: () => Get.to(
+                          ArticelsListScreen(appbarTitle: "مقالات جدید")),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 32),
+                        child: Row(
+                          children: [
+                            Assets.icons.bluePen.image(width: 24),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Text(MyStrings.viewHotestBlog,
+                                style: textthem.headlineSmall!.apply(
+                                  color: SolidColors.seeMore,
+                                ))
+                          ],
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -110,70 +121,80 @@ class HomeScreen extends StatelessWidget {
                     right,
                     8,
                   ),
-                  child: Column(
-                    children: [
-                      Stack(
-                        children: [
-                          Container(
-                            height: size.height / 5.5,
-                            width: size.width / 2.7,
-                            child: CachedNetworkImage(
-                              imageUrl: _homeSreenController
-                                  .topArticelsList[index].image!,
-                              imageBuilder: (context, ImageProvider) =>
-                                  Container(
-                                decoration: BoxDecoration(
+                  child: InkWell(
+                    onTap: () {
+                      var articelsId =
+                          _articelsListController.ArticelsList[index].id!;
+
+                      _singelArticelsController.getsingelArticel(articelsId);
+                    },
+                    child: Column(
+                      children: [
+                        Stack(
+                          children: [
+                            Container(
+                              height: size.height / 5.5,
+                              width: size.width / 2.7,
+                              child: CachedNetworkImage(
+                                imageUrl: _homeSreenController
+                                    .topArticelsList[index].image!,
+                                imageBuilder: (context, ImageProvider) =>
+                                    Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      image: DecorationImage(
+                                          image: ImageProvider,
+                                          fit: BoxFit.cover)),
+                                  foregroundDecoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30),
-                                    image: DecorationImage(
-                                        image: ImageProvider,
-                                        fit: BoxFit.cover)),
-                                foregroundDecoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  gradient: const LinearGradient(
-                                      begin: Alignment.bottomCenter,
-                                      end: Alignment.topCenter,
-                                      colors: GradientColors.blogPost),
+                                    gradient: const LinearGradient(
+                                        begin: Alignment.bottomCenter,
+                                        end: Alignment.topCenter,
+                                        colors: GradientColors.blogPost),
+                                  ),
+                                ),
+                                placeholder: (context, url) => genLoding(),
+                                errorWidget: (context, url, error) => Icon(
+                                  Icons.image_not_supported_outlined,
+                                  color: Colors.black26,
+                                  size: 36,
                                 ),
                               ),
-                              placeholder: (context, url) => genLoding(),
-                              errorWidget: (context, url, error) => Icon(
-                                Icons.image_not_supported_outlined,
-                                color: Colors.black26,
-                                size: 36,
+                            ),
+                            Positioned(
+                              bottom: 14,
+                              right: 16,
+                              left: 16,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    _homeSreenController
+                                        .topArticelsList[index].author!,
+                                    style: textthem.headlineSmall,
+                                  ),
+                                  Text(
+                                    _homeSreenController
+                                        .topArticelsList[index].view!,
+                                    style: textthem.headlineSmall,
+                                  ),
+                                ],
                               ),
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 14,
-                            right: 16,
-                            left: 16,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  _homeSreenController
-                                      .topArticelsList[index].author!,
-                                  style: textthem.headlineSmall,
-                                ),
-                                Text(
-                                  _homeSreenController
-                                      .topArticelsList[index].view!,
-                                  style: textthem.headlineSmall,
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      SizedBox(
-                          width: size.width / 2.7,
-                          child: Text(
-                            _homeSreenController.topArticelsList[index].title!,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                          ))
-                    ],
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        SizedBox(
+                            width: size.width / 2.7,
+                            child: Text(
+                              _homeSreenController
+                                  .topArticelsList[index].title!,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            ))
+                      ],
+                    ),
                   ),
                 );
               }),
