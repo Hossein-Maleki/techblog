@@ -12,18 +12,17 @@ import 'package:techblog/controller/articels-list-controller.dart';
 import 'package:techblog/controller/home-screen-controller.dart';
 import 'package:techblog/controller/singel_articels_controller.dart';
 import 'package:techblog/gen/assets.gen.dart';
- 
+
 import 'package:techblog/view/articels_screen/articels_list.dart';
 import 'package:techblog/view/components/component.dart';
- 
 
 class SingelArticelsScreen extends StatelessWidget {
   SingelArticelsScreen({super.key});
 
   SingelArticelsController _singelArticelsController =
-      Get.put(SingelArticelsController());
+      Get.find<SingelArticelsController>();
 
-  HomeSreenController _homeSreenController = Get.put(HomeSreenController());
+
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +136,6 @@ class SingelArticelsScreen extends StatelessWidget {
                                       .tagslist[index].id!;
                                   await Get.find<ArticelsListController>()
                                       .getArticelsListWithId(tagId);
-                                 
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -194,10 +192,12 @@ class SingelArticelsScreen extends StatelessWidget {
                                     double right = index == 0 ? 32 : 10;
                                     return InkWell(
                                       onTap: () {
-                                           var articelsId =
-                        _singelArticelsController.related[index].id!;
+                                        var articelsId =
+                                            _singelArticelsController
+                                                .related[index].id!;
 
-                      _singelArticelsController.getsingelArticel(articelsId);
+                                        _singelArticelsController
+                                            .getsingelArticel(articelsId);
                                       },
                                       child: Padding(
                                         padding: EdgeInsets.fromLTRB(
@@ -228,25 +228,26 @@ class SingelArticelsScreen extends StatelessWidget {
                                                           image: DecorationImage(
                                                               image:
                                                                   ImageProvider,
-                                                              fit: BoxFit.cover)),
+                                                              fit: BoxFit
+                                                                  .cover)),
                                                       foregroundDecoration:
                                                           BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                30),
-                                                        gradient:
-                                                            const LinearGradient(
-                                                                begin: Alignment
-                                                                    .bottomCenter,
-                                                                end: Alignment
-                                                                    .topCenter,
-                                                                colors:
-                                                                    GradientColors
-                                                                        .blogPost),
+                                                            BorderRadius
+                                                                .circular(30),
+                                                        gradient: const LinearGradient(
+                                                            begin: Alignment
+                                                                .bottomCenter,
+                                                            end: Alignment
+                                                                .topCenter,
+                                                            colors:
+                                                                GradientColors
+                                                                    .blogPost),
                                                       ),
                                                     ),
-                                                    placeholder: (context, url) =>
-                                                        genLoding(),
+                                                    placeholder:
+                                                        (context, url) =>
+                                                            genLoding(),
                                                     errorWidget:
                                                         (context, url, error) =>
                                                             Icon(
@@ -275,7 +276,8 @@ class SingelArticelsScreen extends StatelessWidget {
                                                       ),
                                                       Text(
                                                         _singelArticelsController
-                                                            .related[index].view!,
+                                                            .related[index]
+                                                            .view!,
                                                         style: textthem
                                                             .headlineSmall,
                                                       ),
@@ -290,7 +292,8 @@ class SingelArticelsScreen extends StatelessWidget {
                                                 child: Text(
                                                   _singelArticelsController
                                                       .related[index].title!,
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                   maxLines: 2,
                                                 ))
                                           ],

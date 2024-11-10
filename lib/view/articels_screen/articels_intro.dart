@@ -9,11 +9,11 @@ import 'package:techblog/constans/const_strings.dart';
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:validators/validators.dart';
 
-class ArticelsIntro extends StatelessWidget {
-  ArticelsIntro({
+class ArticelsIntroScreen extends StatelessWidget {
+  ArticelsIntroScreen({
     super.key,
   });
-  RegisterController _registerController = Get.put(RegisterController());
+  var _registerController =  Get.find <  RegisterController>()  ;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -83,6 +83,7 @@ class ArticelsIntro extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(16),
                       child: TextField(
+                        controller: _registerController.verifyCode,
                         style: textthem.bodyMedium,
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
@@ -91,10 +92,11 @@ class ArticelsIntro extends StatelessWidget {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (context) {
-                            return Categorys();
-                          }));
+                          _registerController.verify();
+                          // Navigator.of(context).pushReplacement(
+                          //     MaterialPageRoute(builder: (context) {
+                          //   return Categorys();
+                          // }));
                         },
                         child: Text(
                           MyStrings.continuation,

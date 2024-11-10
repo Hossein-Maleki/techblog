@@ -18,19 +18,18 @@ import 'package:techblog/view/components/component.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({
     super.key,
-    required this.size,
-    required this.textthem,
   });
-  ArticelsListController _articelsListController =
-      Get.put(ArticelsListController());
-  SingelArticelsController _singelArticelsController =
-      Get.put(SingelArticelsController());
-  HomeSreenController _homeSreenController = Get.put(HomeSreenController());
-  final Size size;
-  final TextTheme textthem;
+
+   final _articelsListController =
+     Get.find<ArticelsListController>();
+
+final _singelArticelsController =
+      Get.find<SingelArticelsController>();
+  final _homeSreenController = Get.find<HomeSreenController>();
 
   @override
   Widget build(BuildContext context) {
+    var textthem = Theme.of(context).textTheme;
     return SingleChildScrollView(
       child: SafeArea(
           child: Obx(() => _homeSreenController.isLoading.value == true
@@ -39,12 +38,12 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    genMianPoster(),
+                    genMianPoster(textthem),
                     const SizedBox(
                       height: 12,
                     ),
                     //list view
-                    genTagList(),
+                    genTagList(textthem),
                     const SizedBox(
                       height: 12,
                     ),
@@ -71,8 +70,8 @@ class HomeScreen extends StatelessWidget {
                       height: 7,
                     ),
                     //listview blog
-                    genTopArticelsList(),
-                    SizedBox(
+                    genTopArticelsList(textthem),
+                    const SizedBox(
                       height: 8,
                     ),
                     Padding(
@@ -93,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     //listview podcast
                     genTopPdcastList(),
-                    SizedBox(
+                    const SizedBox(
                       height: 60,
                     )
                   ],
@@ -105,9 +104,9 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget genTopArticelsList() {
+  Widget genTopArticelsList(TextTheme textTheme) {
     return SizedBox(
-        height: size.height / 3.8,
+        height: Get.height / 3.8,
         child: Obx(
           () => ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -132,9 +131,9 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Stack(
                           children: [
-                            Container(
-                              height: size.height / 5.5,
-                              width: size.width / 2.7,
+                            SizedBox(
+                              height: Get.height / 5.5,
+                              width: Get.width / 2.7,
                               child: CachedNetworkImage(
                                 imageUrl: _homeSreenController
                                     .topArticelsList[index].image!,
@@ -154,7 +153,7 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                                 placeholder: (context, url) => genLoding(),
-                                errorWidget: (context, url, error) => Icon(
+                                errorWidget: (context, url, error) => const Icon(
                                   Icons.image_not_supported_outlined,
                                   color: Colors.black26,
                                   size: 36,
@@ -172,12 +171,12 @@ class HomeScreen extends StatelessWidget {
                                   Text(
                                     _homeSreenController
                                         .topArticelsList[index].author!,
-                                    style: textthem.headlineSmall,
+                                    style: textTheme.headlineSmall,
                                   ),
                                   Text(
                                     _homeSreenController
                                         .topArticelsList[index].view!,
-                                    style: textthem.headlineSmall,
+                                    style: textTheme.headlineSmall,
                                   ),
                                 ],
                               ),
@@ -186,7 +185,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         SizedBox(
-                            width: size.width / 2.7,
+                            width: Get.width / 2.7,
                             child: Text(
                               _homeSreenController
                                   .topArticelsList[index].title!,
@@ -203,7 +202,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget genTopPdcastList() {
     return SizedBox(
-        height: size.height / 3.8,
+        height: Get.height / 3.8,
         child: Obx(
           () => ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -221,8 +220,8 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        height: size.height / 5.5,
-                        width: size.width / 2.7,
+                        height: Get.height / 5.5,
+                        width: Get.width / 2.7,
                         child: CachedNetworkImage(
                           imageUrl: _homeSreenController
                               .topPodcastList[index].poster!,
@@ -233,7 +232,7 @@ class HomeScreen extends StatelessWidget {
                                       image: ImageProvider,
                                       fit: BoxFit.cover))),
                           placeholder: (context, url) => genLoding(),
-                          errorWidget: (context, url, error) => Icon(
+                          errorWidget: (context, url, error) => const Icon(
                             Icons.image_not_supported_outlined,
                             color: Colors.black26,
                             size: 36,
@@ -251,12 +250,12 @@ class HomeScreen extends StatelessWidget {
         ));
   }
 
-  Widget genMianPoster() {
+  Widget genMianPoster(TextTheme textTheme) {
     return Stack(
       children: [
         Container(
-          height: size.height / 4.2,
-          width: size.width / 1.2,
+          height: Get.height / 4.2,
+          width: Get.width / 1.2,
           child: CachedNetworkImage(
             imageUrl: _homeSreenController.postermodel.value.image!,
             imageBuilder: (contex, imageprovider) => Container(
@@ -290,11 +289,11 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Text(
                     "حسین ملکی",
-                    style: textthem.headlineMedium,
+                    style: textTheme.headlineMedium,
                   ),
                   Text(
                     " Like 253",
-                    style: textthem.headlineMedium,
+                    style: textTheme.headlineMedium,
                   )
                 ],
               ),
@@ -309,7 +308,7 @@ class HomeScreen extends StatelessWidget {
                       _homeSreenController.postermodel.value.title!,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: textthem.headlineLarge,
+                      style: textTheme.headlineLarge,
                     ),
                   )
                 ],
@@ -321,16 +320,16 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget genTagList() {
+  Widget genTagList(TextTheme textTheme) {
     return SizedBox(
-      width: size.width,
-      height: size.height / 16,
+      width: Get.width,
+      height: Get.height / 16,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: _homeSreenController.tagsList.length,
           itemBuilder: (context, index) {
             double right = index == 0 ? 32 : 10;
-            return MainTags(right: right, textthem: textthem, index: index);
+            return MainTags(right: right, textthem: textTheme, index: index);
           }),
     );
   }

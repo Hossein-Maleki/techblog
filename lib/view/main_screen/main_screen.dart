@@ -1,20 +1,17 @@
- 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:techblog/controller/register-controller.dart';
+import 'package:techblog/main.dart';
 import 'package:techblog/view/articels_screen/articels_intro.dart';
 import 'package:techblog/view/main_screen/home_screen.dart';
 import 'package:techblog/view/profilescreen.dart';
 import 'package:techblog/constans/const_colors.dart';
 import 'package:techblog/constans/const_strings.dart';
- 
+
 import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/service/lunch-url.dart';
- 
-
- 
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
@@ -45,11 +42,11 @@ class MainScreen extends StatelessWidget {
                 onTap: () async {
                   await Share.share(MyStrings.shareText);
                 },
-                title:  Text(MyStrings.shareTec)),
+                title: Text(MyStrings.shareTec)),
             const Divider(),
-             ListTile(
-              onTap:  () => myLaunchUrl(MyStrings.techBlogGithubUrl),
-              title: Text("تک‌بلاگ در گیت هاب"))
+            ListTile(
+                onTap: () => myLaunchUrl(MyStrings.techBlogGithubUrl),
+                title: Text("تک‌بلاگ در گیت هاب"))
           ],
         ),
       ),
@@ -74,33 +71,32 @@ class MainScreen extends StatelessWidget {
       backgroundColor: SolidColors.scaffoldBg,
       body: Stack(children: [
         Positioned.fill(
-          child:Obx(()=> IndexedStack(
+            child: Obx(
+          () => IndexedStack(
             index: selectedPageIndex.value,
             children: [
-              HomeScreen(size: size, textthem: textthem),
-              ArticelsIntro(),
+              HomeScreen(),
+              ArticelsIntroScreen(),
               Center(child: profilescreen(size: size, textthem: textthem))
             ],
-          ),)
-        ),
+          ),
+        )),
         ButtonNavigator(
-          size: size,
-           changePage: (int valeu) =>   selectedPageIndex.value = valeu
-        )
+            size: size,
+            changePage: (int valeu) => selectedPageIndex.value = valeu)
       ]),
     );
   }
 }
 
 class ButtonNavigator extends StatelessWidget {
-  ButtonNavigator({super.key, required this.size, required this. changePage});
-
+  ButtonNavigator({super.key, required this.size, required this.changePage});
+  RegisterController _registerController = Get.put(RegisterController());
   final Size size;
- final void Function(int) changePage;
+  final void Function(int) changePage;
 
   @override
   Widget build(BuildContext context) {
-      
     return Positioned(
       bottom: 0,
       right: 0,
@@ -123,13 +119,17 @@ class ButtonNavigator extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 InkWell(
-                    onTap: () =>  changePage(2),
+                    onTap: () => changePage(2),
                     child: Assets.icons.user.image(width: 32)),
                 InkWell(
-                    onTap: () => changePage(1),
+                    onTap: () {
+                      Get.toNamed(
+                        
+                        MyAppScren.articelsIntro);
+                    },
                     child: Assets.icons.write.image(width: 32)),
                 InkWell(
-                    onTap: () =>  changePage(0),
+                    onTap: () => changePage(0),
                     child: Assets.icons.home.image(width: 32))
               ],
             ),
