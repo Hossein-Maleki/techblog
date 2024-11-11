@@ -9,7 +9,7 @@ import 'package:techblog/constans/const_colors.dart';
 import 'package:techblog/controller/articels-list-controller.dart';
 import 'package:techblog/controller/singel_articels_controller.dart';
 import 'package:techblog/view/components/component.dart';
-import 'package:techblog/view/singel_articels.dart';
+import 'package:techblog/view/articels_screen/singel_articels.dart';
 
 class ArticelsListScreen extends StatelessWidget {
   String? appbarTitle;

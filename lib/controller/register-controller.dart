@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:techblog/constans/api_constant.dart';
+import 'package:techblog/constans/const_strings.dart';
+import 'package:techblog/gen/assets.gen.dart';
 import 'package:techblog/main.dart';
 import 'package:techblog/service/api-provider.dart';
 import 'package:techblog/view/articels_screen/articels_intro.dart';
@@ -67,7 +70,7 @@ class RegisterController extends GetxController {
         final box = GetStorage();
         box.write("user_id", resp["user_id"]);
         box.write("token", resp["token"]);
-        Get.offAndToNamed( MyAppScren.mainScreen);
+        Get.offAndToNamed(MyAppScren.mainScreen);
         Get.snackbar(
             backgroundColor: Colors.green,
             colorText: Colors.black87,
@@ -86,11 +89,61 @@ class RegisterController extends GetxController {
   }
 
   statuslogin() {
-    if (GetStorage().read("token") == null) {
+    if (GetStorage().read("token") == 0) {
       Get.to(ArticelsIntroScreen());
     } else {
-      Get.snackbar("title", "قبلا ثبت نام شدید");
-      print("post screen");
+      genMangmentaBottomshit();
     }
   }
-}
+
+ Future genMangmentaBottomshit( ) {
+    return    Get.bottomSheet(Container(
+      height: Get.height / 3,
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topRight: Radius.circular(12), topLeft: Radius.circular(12)),
+          color: Colors.white),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+               
+              children: [
+                SvgPicture.asset(
+                  Assets.images.tcbot,
+                  width: 54, 
+                ),
+                SizedBox(width: 10,),
+                Center(child: Text(MyStrings.shareKnowledge  ,    ))
+              ],
+            ),
+          ),
+          Text(MyStrings.gigTech),
+          SizedBox(height: 18,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Row(
+                children: [
+                  Assets.icons.writePodcastIcon.image(width: 42,
+                 ),     SizedBox(width: 4,),
+                  Text(MyStrings.ManagePodcast)
+                ],
+              ),
+              Row(
+                children: [
+                  Assets.icons.writeArticle.image(width: 42),
+                  SizedBox(width: 4,),
+                  Text(MyStrings.titleAppBarManageArticle)
+                ],
+              )
+            ],
+          )
+        ],
+      ),
+    ));
+  }
+  }
+ 

@@ -6,7 +6,7 @@ import 'package:techblog/models/singel_articels.dart';
 import 'package:techblog/models/tags.model.dart';
 
 import 'package:techblog/service/api-provider.dart';
-import 'package:techblog/view/singel_articels.dart';
+import 'package:techblog/view/articels_screen/singel_articels.dart';
 
 class SingelArticelsController extends GetxController {
   RxInt postIdContoreler = RxInt(0);

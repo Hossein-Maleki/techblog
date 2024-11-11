@@ -123,9 +123,7 @@ class ButtonNavigator extends StatelessWidget {
                     child: Assets.icons.user.image(width: 32)),
                 InkWell(
                     onTap: () {
-                      Get.toNamed(
-                        
-                        MyAppScren.articelsIntro);
+                      _registerController.statuslogin();
                     },
                     child: Assets.icons.write.image(width: 32)),
                 InkWell(
