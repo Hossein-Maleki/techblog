@@ -96,9 +96,10 @@ class RegisterController extends GetxController {
     }
   }
 
- Future genMangmentaBottomshit( ) {
-    return    Get.bottomSheet(Container(
-      height: Get.height / 3,
+  Future genMangmentaBottomshit() {
+    var theme = Theme.of(Get.context!);
+    return Get.bottomSheet(Container(
+      height: Get.height / 2.7,
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(12), topLeft: Radius.circular(12)),
@@ -109,33 +110,56 @@ class RegisterController extends GetxController {
             padding: const EdgeInsets.all(24),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-               
               children: [
                 SvgPicture.asset(
+                  alignment: Alignment.center,
                   Assets.images.tcbot,
-                  width: 54, 
+                  width: 54,
                 ),
-                SizedBox(width: 10,),
-                Center(child: Text(MyStrings.shareKnowledge  ,    ))
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  MyStrings.shareKnowledge,
+                  style: theme.textTheme.titleMedium,
+                )
               ],
             ),
           ),
-          Text(MyStrings.gigTech),
-          SizedBox(height: 18,),
+          Padding(
+            padding: const EdgeInsets.only(right: 28,left: 24 ),
+            child: Text(
+              MyStrings.gigTech,
+              
+              style: theme.textTheme.labelMedium,
+            ),
+          ),
+          SizedBox(
+            height: 18,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Row(
-                children: [
-                  Assets.icons.writePodcastIcon.image(width: 42,
-                 ),     SizedBox(width: 4,),
-                  Text(MyStrings.ManagePodcast)
-                ],
+              InkWell(
+                onTap: () =>Get.toNamed( MyAppScren.managmentArticels ) ,
+                child: Row(
+                  children: [
+                    Assets.icons.writePodcastIcon.image(
+                      width: 42,
+                    ),
+                    SizedBox(
+                      width: 6,
+                    ),
+                    Text(MyStrings.ManagePodcast)
+                  ],
+                ),
               ),
               Row(
                 children: [
                   Assets.icons.writeArticle.image(width: 42),
-                  SizedBox(width: 4,),
+                  SizedBox(
+                    width: 6,
+                  ),
                   Text(MyStrings.titleAppBarManageArticle)
                 ],
               )
@@ -145,5 +169,4 @@ class RegisterController extends GetxController {
       ),
     ));
   }
-  }
- 
+}

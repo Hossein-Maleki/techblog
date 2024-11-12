@@ -27,7 +27,11 @@ class TechDivider extends StatelessWidget {
 }
 
 class MainTags extends StatelessWidget {
-  const MainTags({super.key, required this.textthem,  required this.index,   required double right});
+  const MainTags(
+      {super.key,
+      required this.textthem,
+      required this.index,
+      required double right});
 
   final TextTheme textthem;
   final int index;
@@ -58,7 +62,8 @@ class MainTags extends StatelessWidget {
 }
 
 Widget genLoding() {
-  return SizedBox(height: Get.height,
+  return SizedBox(
+    height: Get.height,
     child: SpinKitThreeBounce(
       color: SolidColors.primaryColor.withOpacity(0.8),
       size: 26,
@@ -68,14 +73,12 @@ Widget genLoding() {
 
 PreferredSize genAppBar(String title) {
   return PreferredSize(
-      preferredSize: Size.fromHeight(80),
+      preferredSize: Size.fromHeight(85),
       child: Padding(
-          padding: const EdgeInsets.fromLTRB(18, 14, 18, 14),
+          padding: const EdgeInsets.fromLTRB(20, 25, 18, 20),
           child: AppBar(
-             
             primary: true,
             centerTitle: true,
-
             automaticallyImplyLeading: true,
             actions: [
               Text(title,

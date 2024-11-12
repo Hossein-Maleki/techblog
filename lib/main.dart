@@ -8,6 +8,7 @@ import 'package:techblog/constans/api_constant.dart';
 import 'package:techblog/service/api-provider.dart';
 import 'package:techblog/view/articels_screen/articels_intro.dart';
 import 'package:techblog/view/articels_screen/articels_list.dart';
+import 'package:techblog/view/articels_screen/managment_articels.dart';
 import 'package:techblog/view/main_screen/home_screen.dart';
 import 'package:techblog/view/main_screen/main_screen.dart';
 
@@ -40,7 +41,8 @@ class MyApp extends StatelessWidget {
         GetPage(name: MyAppScren.homeScreen, page: () => HomeScreen()),
         GetPage(name: MyAppScren.mainScreen, page: () => MainScreen(),binding: ArticelsBinding()),
         GetPage( name: MyAppScren.articelsIntro, page: () => ArticelsIntroScreen() ,binding: RegisterBinding()),
-        GetPage(name: MyAppScren.splashScreen, page: () => const SplashScreen())
+        GetPage(name: MyAppScren.splashScreen, page: () => const SplashScreen()),
+        GetPage(name: MyAppScren.managmentArticels, page: () =>   ManagmentArticelsScreen())
       ],
       theme: genLightTheme(),
       home: SplashScreen(),
@@ -100,6 +102,12 @@ class MyApp extends StatelessWidget {
             fontSize: 14,
             fontWeight: FontWeight.w600,
           ),
+        labelMedium: TextStyle(
+            color: Color.fromARGB(255, 0, 0, 0),
+            fontFamily: "iransans",
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ), 
           labelSmall: TextStyle(
               fontFamily: "iransans",
               fontWeight: FontWeight.w600,
@@ -109,6 +117,11 @@ class MyApp extends StatelessWidget {
               fontFamily: "iransans",
               fontWeight: FontWeight.w600,
               fontSize: 18,
+              color: Color.fromARGB(255, 0, 0, 0), ),
+              titleMedium : TextStyle(
+              fontFamily: "iransans",
+              fontWeight: FontWeight.w600,
+              fontSize: 15,
               color: Color.fromARGB(255, 0, 0, 0))),
     );
   }
@@ -119,4 +132,5 @@ class MyAppScren {
   static const String mainScreen = "/mainscreen";
   static const String homeScreen = "/homescreen";
   static const String articelsIntro = "/Articelintro";
+  static const String managmentArticels = "/managmentarticels";
 }
