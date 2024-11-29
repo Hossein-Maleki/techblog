@@ -141,7 +141,7 @@ class RegisterController extends GetxController {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               InkWell(
-                onTap: () =>Get.toNamed( MyAppScren.managmentArticels ) ,
+                onTap: () =>Get.toNamed( MyAppScren.managmentArticels, ) ,
                 child: Row(
                   children: [
                     Assets.icons.writePodcastIcon.image(

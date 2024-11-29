@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:techblog/controller/articels-list-controller.dart';
 import 'package:techblog/controller/home-screen-controller.dart';
+import 'package:techblog/controller/managment-articels-controller.dart';
 import 'package:techblog/controller/register-controller.dart';
 import 'package:techblog/controller/singel_articels_controller.dart';
 
@@ -25,3 +26,12 @@ class HomeScreenBinding implements Bindings {
      
   }
 }
+class ManegmentBinding implements Bindings{
+  
+      
+     @override
+     void dependencies() {
+  Get.lazyPut(() =>  ManageArticleController());
+     }
+  }
+ 

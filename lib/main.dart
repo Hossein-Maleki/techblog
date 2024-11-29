@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: MyAppScren.mainScreen, page: () => MainScreen(),binding: ArticelsBinding()),
         GetPage( name: MyAppScren.articelsIntro, page: () => ArticelsIntroScreen() ,binding: RegisterBinding()),
         GetPage(name: MyAppScren.splashScreen, page: () => const SplashScreen()),
-        GetPage(name: MyAppScren.managmentArticels, page: () =>   ManagmentArticelsScreen())
+        GetPage(name: MyAppScren.managmentArticels, page: () =>   ManagmentArticelsScreen(),binding: ManegmentBinding())
       ],
       theme: genLightTheme(),
       home: SplashScreen(),
